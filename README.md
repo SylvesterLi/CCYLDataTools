@@ -10,3 +10,6 @@
 - 
 
 
+###  Notice
+-  当前Chrome为74版
+-  Chrome Driver忘记了。。。下载网址为http://chromedriver.storage.googleapis.com/index.html
