@@ -1,15 +1,15 @@
 # SeleniumPyTest
 
 ### webScpTest01.py
-*  »ù´¡²âÊÔ
-*  Ñ§Ï°¼¯ºÏ
-**  https://www.bilibili.com/video/av19057145/?p=13
+*  åŸºç¡€æµ‹è¯•
+*  å­¦ä¹ é›†åˆ
+*  https://www.bilibili.com/video/av19057145/?p=13
 
-### Î¢²©Ïà¹Ø×ÊÁÏÍ³¼Æ
-- Ê¹ÓÃm.weibo.cn¹ÅÀÏÍøÒ³×¥È¡½Ì³Ìhttps://github.com/dataabc/weiboSpider/blob/master/weiboSpider.py
+### å¾®åšç›¸å…³èµ„æ–™ç»Ÿè®¡
+- ä½¿ç”¨m.weibo.cnå¤è€ç½‘é¡µæŠ“å–æ•™ç¨‹https://github.com/dataabc/weiboSpider/blob/master/weiboSpider.py
 - 
 
 
 ###  Notice
--  µ±Ç°ChromeÎª74°æ
--  Chrome DriverÍü¼ÇÁË¡£¡£¡£ÏÂÔØÍøÖ·Îªhttp://chromedriver.storage.googleapis.com/index.html
+-  å½“å‰Chromeä¸º74ç‰ˆ
+-  Chrome Driverå¿˜è®°äº†ã€‚ã€‚ã€‚ä¸‹è½½ç½‘å€ä¸ºhttp://chromedriver.storage.googleapis.com/index.html
