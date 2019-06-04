@@ -9,27 +9,54 @@ driver = webdriver.Chrome()  # Optional argument, if not specified will search p
 print(datetime.now())
 driver.get('https://weibo.com/5849524630/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=1#feedtop') # 获取百度页面
 try:
-    # driver.get('http://baidu.com')
+    driver.implicitly_wait(15)
+    if driver.find_element_by_link_text("登录"):
+        print("success!!!")
+        input=driver.find_element_by_link_text("登录")
+        input.click()
+        # 此时页面加载完成可以等待异步页面元素
+        # 可以开始登录
+        WebDriverWait(driver,20).until(lambda driver:driver.find_element_by_link_text("我的主页"))
+        print("回到我的主页")
     
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    time.sleep(5)
+    driver.implicitly_wait(5)
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    time.sleep(2)
+    driver.implicitly_wait(5)
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    time.sleep(2)
+    print("往下滑了")
+    driver.implicitly_wait(5)
     driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    element= WebDriverWait(driver,5,0.5).until(lambda driver:driver.find_element_by_link_text("下一页"))
+    driver.implicitly_wait(5)
+    print("滑到底了")
+
+    # 这一步有问题
+    WebDriverWait(driver,20).until(lambda driver:driver.find_element_by_link_text("下一页"))
+    print("ready click next page")
+    # driver.get('http://baidu.com')
+    
+ 
+    # time.sleep(5)
+    # driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+    # time.sleep(2)
+    # driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+    # time.sleep(2)
+    # driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
+    # element= WebDriverWait(driver,5,0.5).until(lambda driver:driver.find_element_by_link_text("下一页"))
     # input = driver.find_element_by_id('kw') #获取输入框
     
 
-    input=driver.find_element_by_link_text("下一页")
-    input.click()
+    inp=driver.find_element_by_link_text("下一页")
+    inp.click()
+    print("clicked!!!")
 
-
-    
-finally:
+except:
     print("Error")
     print(datetime.now())
+    
+finally:
+    pass
+    
 # searchButton = driver.find_element_by_id('su') #获取搜索按钮
 
 # input.send_keys("Python") #输入框输入"Python"
