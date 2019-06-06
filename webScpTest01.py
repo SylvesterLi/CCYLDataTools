@@ -8,31 +8,49 @@ import time
 driver = webdriver.Chrome()  # Optional argument, if not specified will search path.
 print(datetime.now())
 driver.get('https://weibo.com/5849524630/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=1#feedtop') # 获取百度页面
+print(driver)
 try:
     driver.implicitly_wait(15)
+    print(driver)
     if driver.find_element_by_link_text("登录"):
         print("success!!!")
         input=driver.find_element_by_link_text("登录")
         input.click()
+        try:
+            login_safe=driver.find_element_by_link_text("安全登录")
+            login_safe.click()
+            driver.implicitly_wait(15)
+            print("safe click")
+        except:
+            print("safe login failed!!!")
+            
         # 此时页面加载完成可以等待异步页面元素
         # 可以开始登录
-        WebDriverWait(driver,20).until(lambda driver:driver.find_element_by_link_text("我的主页"))
+        
         print("回到我的主页")
-    
-    driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    driver.implicitly_wait(5)
-    driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    driver.implicitly_wait(5)
-    driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    print("往下滑了")
-    driver.implicitly_wait(5)
-    driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
-    driver.implicitly_wait(5)
-    print("滑到底了")
-
+        driver.implicitly_wait(15)
+    if driver.find_element_by_partial_link_text("编辑个人资料"):
+        action = Actions(driver)
+        action.sendKeys(Keys.END)
+        print("Edit found")
+        action.sendKeys(Keys.END)
+        driver.implicitly_wait(20)
+        action.sendKeys(Keys.END)
+        driver.implicitly_wait(20)
+        action.sendKeys(Keys.END)
+        print("往下滑了")
+        driver.implicitly_wait(20)
+        action.sendKeys(Keys.END)
+        driver.implicitly_wait(20)
+        action.sendKeys(Keys.END)
+        driver.implicitly_wait(20)
+        print("滑到底了")
+    else:
+        print("Edit Not Found")
+        print("ready click next page")
     # 这一步有问题
-    WebDriverWait(driver,20).until(lambda driver:driver.find_element_by_link_text("下一页"))
-    print("ready click next page")
+    # WebDriverWait(driver,20).until(lambda driver:driver.find_element_by_link_text("下一页"))
+        
     # driver.get('http://baidu.com')
     
  
@@ -44,18 +62,20 @@ try:
     # driver.execute_script('window.scrollTo(0, document.body.scrollHeight)')
     # element= WebDriverWait(driver,5,0.5).until(lambda driver:driver.find_element_by_link_text("下一页"))
     # input = driver.find_element_by_id('kw') #获取输入框
-    
-
-    inp=driver.find_element_by_link_text("下一页")
-    inp.click()
-    print("clicked!!!")
-
+    try:
+        
+        driver.implicitly_wait(20)
+        inp=driver.find_element_by_partial_link_text("下一页")
+        inp.click()
+        print("clicked!!!")
+    except:
+        print("not found Next Page")
+        
 except:
-    print("Error")
+    print("Try Error上面崩了")
     print(datetime.now())
     
-finally:
-    pass
+
     
 # searchButton = driver.find_element_by_id('su') #获取搜索按钮
 
