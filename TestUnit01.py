@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 def is_element_exist(xp):
     try: 
         if len(xp)==0:
-            print("未找到Rquest Element")
+            print("下一页Element未加载出来")
             return False
         elif len(xp)==1:
             return True
@@ -19,10 +19,13 @@ def is_element_exist(xp):
         return False
 
 driver=webdriver.Chrome()
-driver.get('https://weibo.com/5849524630/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=1#feedtop') # 获取百度页面
+# 当前导航到第四页
+driver.get('https://weibo.com/p/1001062321615032/home?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=2#feedtop')
+# driver.get('https://weibo.com/5849524630/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=4#feedtop')
+# 打印时间
 print(datetime.now())
 print("DateTime______________>>>>>>>>>>>>>")
-print(driver.page_source)
+# print(driver.page_source)
 
 # 等待15秒 页面加载完毕
 driver.implicitly_wait(15)
@@ -44,27 +47,37 @@ print(safeLoginBtn)
 try:
     
     # WebDriverWait(driver,30).until(lambda driver:driver.find_element_by_xpath('//*[@id="Pl_Core_UserInfo__6"]/div[2]/div[1]/div/a/span/'))
-    WebDriverWait(driver,30,0.2).until(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT,"编辑个人资料")))
-    # # print(driver.find_element_by_link_text("管理中心").id())
-    # manager=driver.find_element_by_link_text("管理中心")
-    # print(manager)
+    # 个人选择“编辑个人资料，官博选择“编辑微博” 此处存在js 检测不到
+    # 换成检测搜索文本框 偶然情况下是会通过，但是没有关系 这里不再验证是否为自己账号，只做页面加载情况验证
+    WebDriverWait(driver,40,0.2).until(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT,"青春湖北")))
+    # 等待成功 未找到元素或者扫码时间过长就会报错
     print("Web Driver Login Success!!!!!!!!!!!!!!",datetime.now())
 except:
     print("failed!!!!!!!!!!!!!",datetime.now())
 
 # 执行下滑操作
-# print(EC.presence_of_element_located((By.PARTIAL_LINK_TEXT,"下一页")))
 # 一直未找到就一直给我找
+# 经过验证此循环没有问题
+# 会有较长时间卡顿
 while is_element_exist(driver.find_elements_by_link_text("下一页"))==False:
     driver.execute_script('window.scrollTo(0,1000000);console.log("I am scrolling!!!")')
 
+print("已找到最后一页，已到达底部")
+driver.execute_script('window.scrollTo(0,1000000);console.log("I am scrolling!!!")')
+
+# 表明当前页面已经加载完毕，可以开始读取所有节点
+# 这是哪一页
 
 
-# while EC.presence_of_element_located((By.PARTIAL_LINK_TEXT,"下一页"))!=EC.WebElement:
-#     driver.execute_script('window.scrollTo(0,1000000);console.log("I am scrolling!!!")')
+# xpath 比较
+# //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[3]
+# //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[3]/div[2]/div/ul/li[1]/a/span/span/i/text()
+# //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[4]/div[2]/div/ul/li[1]/a/span/span/i
 
-# print(driver.find_element_by_partial_link_text("下一页"))
-# 滑到底了 可以开始采集本页微博了
+print('第',2,'页第',3,'条,阅读量为：')
+print(driver.find_element_by_xpath('//*[@id="Pl_Official_MyProfileFeed__25"]/div/div[4]/div[2]/div/ul/li[1]/a/span/span/i').text)
+
+
 
 
 
