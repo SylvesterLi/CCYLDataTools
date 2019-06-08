@@ -18,9 +18,12 @@ def is_element_exist(xp):
     except:
         return False
 
+
+# 生成网址
+pageIndex=2
 driver=webdriver.Chrome()
 # 当前导航到第四页
-driver.get('https://weibo.com/p/1001062321615032/home?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=2#feedtop')
+driver.get('https://weibo.com/p/1001062321615032/home?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=%d#feedtop' % pageIndex)
 # driver.get('https://weibo.com/5849524630/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=4#feedtop')
 # 打印时间
 print(datetime.now())
@@ -74,8 +77,18 @@ driver.execute_script('window.scrollTo(0,1000000);console.log("I am scrolling!!!
 # //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[3]/div[2]/div/ul/li[1]/a/span/span/i/text()
 # //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[4]/div[2]/div/ul/li[1]/a/span/span/i
 
-print('第',2,'页第',3,'条,阅读量为：')
-print(driver.find_element_by_xpath('//*[@id="Pl_Official_MyProfileFeed__25"]/div/div[4]/div[2]/div/ul/li[1]/a/span/span/i').text)
+# i从1开始计数
+# 第几页 还没确定变量 第i条
+# 先确定循环
+i=2
+
+# 简单粗暴 直接看出总数是45 能跑就行
+while i<=46:
+    i=i+1
+    print('第'+str(pageIndex)+'页第'+str(i)+'条：')
+    print(driver.find_element_by_xpath('//*[@id="Pl_Official_MyProfileFeed__25"]/div/div[%d]/div[2]/div/ul/li[1]/a/span/span/i' % i).text)
+
+print("<<<<<<done>>>>>>>")
 
 
 
