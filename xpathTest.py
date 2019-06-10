@@ -14,3 +14,6 @@ print(len(texts))
 for t in texts:
     print(t.text)
 print('<<<<<<<<<<<done>>>>>>>>>>>')
+
+# driver.find_element("id","ext-element-15").get_attribute("innerHTML")
+# 获取div中的文本

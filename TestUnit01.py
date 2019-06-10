@@ -91,7 +91,8 @@ while i<=46:
 print("<<<<<<done>>>>>>>")
 
 
-
+# //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[12]/div[1]/div[3]/div[4]
+# 其中12为第几个div 投票、文章、原创 均没有问题
 
 
 
