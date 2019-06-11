@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from datetime import datetime
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from excelWT import write_excel
 
 # 判断元素是否存在
 def is_element_exist(xp):
@@ -20,7 +21,7 @@ def is_element_exist(xp):
 
 
 # 生成网址
-pageIndex=2
+pageIndex=6
 driver=webdriver.Chrome()
 # 当前导航到第四页
 driver.get('https://weibo.com/p/1001062321615032/home?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=%d#feedtop' % pageIndex)
@@ -81,18 +82,26 @@ driver.execute_script('window.scrollTo(0,1000000);console.log("I am scrolling!!!
 # 第几页 还没确定变量 第i条
 # 先确定循环
 i=2
-
+list1 =[]
+list2 =[]
 # 简单粗暴 直接看出总数是45 能跑就行
 while i<=46:
+    
+    list1.append(driver.find_element_by_xpath('//*[@id="Pl_Official_MyProfileFeed__25"]/div/div[%d]/div[2]/div/ul/li[1]/a/span/span/i' % i).text)
+    list2.append('第'+str(pageIndex)+'页第'+str(i-1)+'条：')
     i=i+1
-    print('第'+str(pageIndex)+'页第'+str(i)+'条：')
-    print(driver.find_element_by_xpath('//*[@id="Pl_Official_MyProfileFeed__25"]/div/div[%d]/div[2]/div/ul/li[1]/a/span/span/i' % i).text)
+    # print('第'+str(pageIndex)+'页第'+str(i)+'条：')
+    # print(driver.find_element_by_xpath('//*[@id="Pl_Official_MyProfileFeed__25"]/div/div[%d]/div[2]/div/ul/li[1]/a/span/span/i' % i).text)
 
-print("<<<<<<done>>>>>>>")
+write_excel(list1,list2)
+print("<<<<<<  done   >>>>>>>")
 
 
 # //*[@id="Pl_Official_MyProfileFeed__25"]/div/div[12]/div[1]/div[3]/div[4]
 # 其中12为第几个div 投票、文章、原创 均没有问题
 
+
+
+ 
 
 

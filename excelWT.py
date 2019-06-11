@@ -1,4 +1,5 @@
 import xlwt
+from datetime import datetime
 
 
 #设置表格样式
@@ -13,7 +14,7 @@ def set_style(name,height,bold=False):
     return style
 
 #写Excel
-def write_excel():
+def write_excel(dat1,dat2):
     f = xlwt.Workbook()
     sheet1 = f.add_sheet('微博数据',cell_overwrite_ok=True)
     # row0 = ["姓名","年龄","出生日期","爱好"]
@@ -21,7 +22,14 @@ def write_excel():
 
     # 从0开始算 所以3是第4行
     # 从0开始算 所以5是第6列
-    sheet1.write(0,0,"hell")
+    # dat为数组
+    i=0
+    while i< len(dat1):
+        sheet1.write(i,0,dat1[i])
+        sheet1.write(i,1,dat2[i])
+        i=i+1
+
+    
 
     # #写第一行
     # for i in range(0,len(row0)):
@@ -33,8 +41,16 @@ def write_excel():
     # sheet1.write(1,3,'2006/12/12')
     # sheet1.write_merge(4,5,3,3,'打篮球')
 
-    f.save('test.xls')
+    f.save('微博数据%s.xls' % datetime.now().strftime('%Y-%m-%d-%H-%M-%S'))
+    
+    
 
 if __name__ == '__main__':
-    write_excel()
+    dat1=["da1"]
+
+    dat2=["da1"]
+    write_excel(dat1,dat2)
     print('success')
+    
+
+    
