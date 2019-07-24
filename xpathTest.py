@@ -21,5 +21,4 @@ print('<<<<<<<<<<<done>>>>>>>>>>>')
 # driver.find_element("id","ext-element-15").get_attribute("innerHTML")
 # 获取div中的文本
 
-write_excel()
 print('success')
